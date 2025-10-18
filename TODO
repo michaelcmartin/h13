@@ -1,0 +1,5 @@
+- Break the epoxy dependency by loading all OpenGL functions via SDL.
+- Direct support for SDL3, with or without OpenGL.
+- Selectable scalers.
+- Nonsquare pixels.
+- More demos.

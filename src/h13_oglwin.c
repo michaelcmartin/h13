@@ -1,11 +1,8 @@
-#include <epoxy/gl.h>
-#ifdef _WIN32
-#include <epoxy/wgl.h>
-#endif
 #include <SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "h13/h13.h"
+#include "glad/gl.h"
 
 typedef struct h13_ogl_win_s {
     h13_win_t h13;
@@ -152,7 +149,7 @@ h13_init_opengl(const char *title, int w, int h, int tex_w, int tex_h)
     unsigned char *pixels;
     SDL_Window *window;
     SDL_GLContext ctx;
-    int legacy;
+    int legacy, version;
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0) {
         fprintf(stderr, "Could not init SDL: %s\n", SDL_GetError());
@@ -217,9 +214,8 @@ h13_init_opengl(const char *title, int w, int h, int tex_w, int tex_h)
 
     /* Set up the rendering context. */
     SDL_GL_MakeCurrent(window, ctx);
-#ifdef _WIN32
-    epoxy_handle_external_wglMakeCurrent();
-#endif
+    version = gladLoadGL((GLADloadfunc)SDL_GL_GetProcAddress);
+    printf("GLAD reports OpenGL version %d.%d\n", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
 
     /* Now create the various static elements of the display. */
 

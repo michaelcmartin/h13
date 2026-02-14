@@ -1,5 +1,17 @@
-- Break the epoxy dependency by loading all OpenGL functions via SDL.
-- Direct support for SDL3, with or without OpenGL.
-- Selectable scalers.
-- Nonsquare pixels.
-- More demos.
+Alternate approaches to embedding the library:
+  [X] dev manages event loop, calls into the render/init routines on their own
+  [ ] Library manages event loop, calls dev-provided init/update loop
+      [ ] API for keyboard/mouse input
+      [ ] Typeahead text buffer independent of raw keypress events
+  [ ] User runs in a worker thread and offers potential sync points for rendering
+
+Alternate backends:
+  [X] SDL2-OpenGL 3.2
+  [X] SDL2-OpenGL 2.1
+  [ ] Direct3D (9? 11? 12?)
+  [ ] Metal
+
+Frontend support:
+  [ ] Text rendering
+  [ ] Screen-native-res debug console
+  [ ] Nonsquare pixels
